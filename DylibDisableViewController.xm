@@ -52,7 +52,7 @@ inline NSString *substring(NSString *a,int b) {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-         self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
+        self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
         self.view.backgroundColor = [UIColor colorWithRed:255.0/255.0 green:153.0/255.0 blue:50.0/255.0 alpha:
 255.0/255.0];
 
@@ -68,13 +68,13 @@ inline NSString *substring(NSString *a,int b) {
         extension3 = [self getFileList:@".dylib" num:2 place:@"/Applications/TweakDeleter.app/Topath"];
         extension4 = [self getFileList:@".dylib" num:1 place:@"/Applications/TweakDeleter.app/Topath"];
 
-            UIScrollView *sv = [[UIScrollView alloc] initWithFrame:CGRectMake(0,0,W,H)];
-            UIView *uv = [[UIView alloc] initWithFrame:CGRectMake(0, 0, W,(extension.count)*50+(extension3.count)*50)];
-            [sv addSubview:uv];
-            sv.contentSize = uv.bounds.size;
-            [self.view addSubview:sv];
-            int i=0;        
-            int a=0;
+        UIScrollView *sv = [[UIScrollView alloc] initWithFrame:CGRectMake(0,0,W,H)];
+        UIView *uv = [[UIView alloc] initWithFrame:CGRectMake(0, 0, W,(extension.count)*50+(extension3.count)*50)];
+        [sv addSubview:uv];
+        sv.contentSize = uv.bounds.size;
+        [self.view addSubview:sv];
+        int i=0;        
+        int a=0;
         for(a=0;a<extension3.count;a++) {
 
             NSString *check2 = [extension3 objectAtIndex:a];
@@ -155,7 +155,7 @@ inline NSString *substring(NSString *a,int b) {
        }
 }
 -(void)other:(UIButton*)sender {
-   NSString *str = [swarr componentsJoinedByString:@"\n"];
+    NSString *str = [swarr componentsJoinedByString:@"\n"];
     NSString *strr = [swarr2 componentsJoinedByString:@"\n"];
     NSString *strrr = [NSString stringWithFormat:@"%@%@", str, strr];
     
@@ -172,7 +172,7 @@ inline NSString *substring(NSString *a,int b) {
             NSString *topath = @"/Applications/TweakDeleter.app/Topath";
             NSString *atpath = [NSString stringWithFormat:@"mv %@%@ %@",at,fzf,topath];
             system((char *) [atpath UTF8String]);
-      }
+       }
             //NSString *str2 = [swarr componentsJoinedByString:@"\n"];
         for(int c=0;c<swarr2.count;c++) {
             

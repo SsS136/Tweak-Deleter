@@ -107,36 +107,36 @@ inline NSString *substring(NSString *a,int b) {
 }
 -(void)viewDidLoad {
 
-static NSString *check = nil;
-NSRange range;
-NSMutableArray *fix = [NSMutableArray array];
-NSMutableArray *fix2 = [NSMutableArray array];
-NSMutableArray *fix3 = [NSMutableArray array];
-static NSString *z = nil;
-//NSMutableArray *ar = [NSMutableArray array];
+    static NSString *check = nil;
+    NSRange range;
+    NSMutableArray *fix = [NSMutableArray array];
+    NSMutableArray *fix2 = [NSMutableArray array];
+    NSMutableArray *fix3 = [NSMutableArray array];
+    static NSString *z = nil;
+    //NSMutableArray *ar = [NSMutableArray array];
 
-NSString *String = [[NSString alloc] initWithContentsOfFile:@"/Library/dpkg/status" encoding:NSUTF8StringEncoding error:NULL];
+    NSString *String = [[NSString alloc] initWithContentsOfFile:@"/Library/dpkg/status" encoding:NSUTF8StringEncoding error:NULL];
 
-NSArray *abc = [String splitNewLine2];
+    NSArray *abc = [String splitNewLine2];
 
-for(int i=0;i<abc.count;i++) {
-   check = [abc objectAtIndex:i];
-   NSArray *abc2 = [check splitNewLine];
-   for(int abz=0;abz<abc2.count;abz++) {
-        NSString *check2 = [abc2 objectAtIndex:abz];
-        range = [check2 rangeOfString:@"Package:"];
-        NSRange name = [check rangeOfString:@"Name:"];
-        NSRange nam = [check rangeOfString:@"Package:"];
-        NSRange name2 = [check2 rangeOfString:@"Name:"];
-        NSRange section = [check2 rangeOfString:@"Section:"];
-        if(name.location != NSNotFound && nam.location != NSNotFound) {
-             if(range.location != NSNotFound) [fix addObject:check2];
-             if(name2.location != NSNotFound) {
-                 NSString *sub = substring(check2,6);
-                 [fix2 addObject:sub]; 
-                countt++;
-                //[fix2 addObject:check2];
-            }
+    for(int i=0;i<abc.count;i++) {
+        check = [abc objectAtIndex:i];
+        NSArray *abc2 = [check splitNewLine];
+        for(int abz=0;abz<abc2.count;abz++) {
+            NSString *check2 = [abc2 objectAtIndex:abz];
+            range = [check2 rangeOfString:@"Package:"];
+            NSRange name = [check rangeOfString:@"Name:"];
+            NSRange nam = [check rangeOfString:@"Package:"];
+            NSRange name2 = [check2 rangeOfString:@"Name:"];
+            NSRange section = [check2 rangeOfString:@"Section:"];
+            if(name.location != NSNotFound && nam.location != NSNotFound) {
+                if(range.location != NSNotFound) [fix addObject:check2];
+                if(name2.location != NSNotFound) {
+                    NSString *sub = substring(check2,6);
+                    [fix2 addObject:sub]; 
+                    countt++;
+                        //[fix2 addObject:check2];
+                }
                 if(section.location != NSNotFound) {
                     NSString *secres = substring(check2,9);
                     if([secres isEqualToString:@"Tweaks"]) {
@@ -158,7 +158,7 @@ for(int i=0;i<abc.count;i++) {
                     }else if([secres isEqualToString:@"Security"]) {
                         [fix3 addObject:@"key"];
                     }else if([secres isEqualToString:@"Archiving"]) {
-                        [fix3 addObject:@"graph"];
+                    [fix3 addObject:@"graph"];
                     }else if([secres isEqualToString:@"Scripting"]) {
                         [fix3 addObject:@"script"];
                     }else if([secres isEqualToString:@"Networking"]) {
@@ -168,110 +168,108 @@ for(int i=0;i<abc.count;i++) {
                     }else{
                         [fix3 addObject:@"icon"];
                     }//endif
+                }//endif
             }//endif
-        }//endif
+        }//endfor
     }//endfor
-}//endfor
 
-NSString *str = [fix componentsJoinedByString:@"\n"];
-//NSString *str2 = [fix2 componentsJoinedByString:@"\n"];
-NSArray *zzz = [str componentsSeparatedByString:@" "];
-//NSArray *zzz2 = [str2 componentsSeparatedByString:@" "];
-z = [zzz componentsJoinedByString:@"\n"];
-//NSString *z2 = [zzz2 componentsJoinedByString:@"\n"];
-NSArray *ab = [z splitNewLine];
-//NSArray *ab2 = [z2 splitNewLine];
-//
+    NSString *str = [fix componentsJoinedByString:@"\n"];
 
-for(int a=0;a<ab.count;a++) {
-    NSString *ch = [ab objectAtIndex:a];
-    //NSRange rang = [ch rangeOfString:@"gsc"];
-    //NSRange ran = [ch rangeOfString:@"cy+"];
-    if(![ch isEqualToString:@"Package:"]){
-     [resultarr addObject:ch];
+    NSArray *zzz = [str componentsSeparatedByString:@" "];
+
+    z = [zzz componentsJoinedByString:@"\n"];
+
+    NSArray *ab = [z splitNewLine];
+
+
+    for(int a=0;a<ab.count;a++) {
+        NSString *ch = [ab objectAtIndex:a];
+        
+        if(![ch isEqualToString:@"Package:"]){
+            [resultarr addObject:ch];
+        }
     }
-}
 
-for(int q=0;q<fix.count;q++) {    
-    NSString *ch2 = [fix2 objectAtIndex:q];
-    [resultarr2 addObject:ch2];
-}
+    for(int q=0;q<fix.count;q++) {    
+        NSString *ch2 = [fix2 objectAtIndex:q];
+        [resultarr2 addObject:ch2];
+    }
 
     UIScrollView *sv = [[UIScrollView alloc] initWithFrame:CGRectMake(0,0,W,H)];
     sv.backgroundColor =  [UIColor colorWithRed:255.0/255.0 green:153.0/255.0 blue:50.0/255.0 alpha:
 255.0/255.0];
     UIView *uv = [[UIView alloc] initWithFrame:CGRectMake(0, 0, W, 60*(resultarr.count))];
    
-for(int b=0;b<resultarr.count;b++) {
-    NSString *cho = [resultarr objectAtIndex:b]; 
-    NSString *cho2 = [resultarr2 objectAtIndex:b];
+    for(int b=0;b<resultarr.count;b++) {
+        NSString *cho = [resultarr objectAtIndex:b]; 
+        NSString *cho2 = [resultarr2 objectAtIndex:b];
 
-    NSString *sectionimage = [fix3 objectAtIndex:b];
-    int tweaker = 0;
-    if([sectionimage isEqualToString:@"tweak"]) {
-        tweaker = tweak;
-    }else if([sectionimage isEqualToString:@"tool"]) {
-        tweaker = tool;
-    }else if([sectionimage isEqualToString:@"icon"]) {
-        tweaker = icon;
-    }else if([sectionimage isEqualToString:@"app"]) {
-        tweaker = app;
-    }else if([sectionimage isEqualToString:@"terminal"]) {
-        tweaker = terminal;
-    }else if([sectionimage isEqualToString:@"library"]) {
-        tweaker = library;
-    }else if([sectionimage isEqualToString:@"theme"]) {
-        tweaker = theme;
-    }else if([sectionimage isEqualToString:@"packaging"]) {
-        tweaker = packaging;
-    }else if([sectionimage isEqualToString:@"data"]) {
-        tweaker = data;
-    }else if([sectionimage isEqualToString:@"key"]) {
-        tweaker = key;
-    }else if([sectionimage isEqualToString:@"graph"]) {
-        tweaker = graph;
-    }else if([sectionimage isEqualToString:@"script"]) {
-        tweaker = script;
-    }else if([sectionimage isEqualToString:@"network"]) {
-        tweaker = network;
-    }else if([sectionimage isEqualToString:@"setting"]) {
-        tweaker = setting;
-    }  
+        NSString *sectionimage = [fix3 objectAtIndex:b];
+        int tweaker = 0;
+        if([sectionimage isEqualToString:@"tweak"]) {
+            tweaker = tweak;
+        }else if([sectionimage isEqualToString:@"tool"]) {
+            tweaker = tool;
+        }else if([sectionimage isEqualToString:@"icon"]) {
+            tweaker = icon;
+        }else if([sectionimage isEqualToString:@"app"]) {
+            tweaker = app;
+        }else if([sectionimage isEqualToString:@"terminal"]) {
+            tweaker = terminal;
+        }else if([sectionimage isEqualToString:@"library"]) {
+            tweaker = library;
+        }else if([sectionimage isEqualToString:@"theme"]) {
+            tweaker = theme;
+        }else if([sectionimage isEqualToString:@"packaging"]) {
+            tweaker = packaging;
+        }else if([sectionimage isEqualToString:@"data"]) {
+            tweaker = data;
+        }else if([sectionimage isEqualToString:@"key"]) {
+            tweaker = key;
+        }else if([sectionimage isEqualToString:@"graph"]) {
+            tweaker = graph;
+        }else if([sectionimage isEqualToString:@"script"]) {
+            tweaker = script;
+        }else if([sectionimage isEqualToString:@"network"]) {
+            tweaker = network;
+        }else if([sectionimage isEqualToString:@"setting"]) {
+            tweaker = setting;
+        }  
 
-    iconimage = [UIImage imageWithContentsOfFile:[viewArray objectAtIndex:tweaker]];
-    iconimageview = [[UIImageView alloc] initWithImage:iconimage];
-    //dockImageView.userInteractionEnabled = YES;
-    iconimageview.frame = CGRectMake(0,60*b,40,40);
-    [uv addSubview:iconimageview];
+        iconimage = [UIImage imageWithContentsOfFile:[viewArray objectAtIndex:tweaker]];
+        iconimageview = [[UIImageView alloc] initWithImage:iconimage];
+        //dockImageView.userInteractionEnabled = YES;
+        iconimageview.frame = CGRectMake(0,60*b,40,40);
+        [uv addSubview:iconimageview];
 
-    UILabel *label2 = [[UILabel alloc] init];
-    label2.frame = CGRectMake(0, (60*b)-15, 3*(W/4), 60);
-    //label2.backgroundColor = [UIColor yellowColor];
-    label2.textColor = [UIColor blueColor];
-    label2.font = [UIFont fontWithName:@"AppleGothic" size:16];
-    label2.text = cho2;
-    [label2 setTextAlignment:NSTextAlignmentCenter];
-    [uv addSubview:label2];
+        UILabel *label2 = [[UILabel alloc] init];
+        label2.frame = CGRectMake(0, (60*b)-15, 3*(W/4), 60);
+        //label2.backgroundColor = [UIColor yellowColor];
+        label2.textColor = [UIColor blueColor];
+        label2.font = [UIFont fontWithName:@"AppleGothic" size:16];
+        label2.text = cho2;
+        [label2 setTextAlignment:NSTextAlignmentCenter];
+        [uv addSubview:label2];
 
-    UILabel *label = [[UILabel alloc] init];
-    label.frame = CGRectMake(0, 60*b,3*(W/4), 60);
-    label.backgroundColor = [UIColor colorWithRed:10.0/255.0 green:200.0/255.0 blue:50.0/255.0 alpha:
-255.0/255.0];
-    [label setTextAlignment:NSTextAlignmentCenter];
-    label.textColor = [UIColor blackColor];
-    label.font = [UIFont fontWithName:@"AppleGothic" size:12];
-    label.text = cho;
-    [sv addSubview:label];
+        UILabel *label = [[UILabel alloc] init];
+        label.frame = CGRectMake(0, 60*b,3*(W/4), 60);
+        label.backgroundColor = [UIColor colorWithRed:10.0/255.0 green:200.0/255.0 blue:50.0/255.0 alpha:
+    255.0/255.0];
+        [label setTextAlignment:NSTextAlignmentCenter];
+        label.textColor = [UIColor blackColor];
+        label.font = [UIFont fontWithName:@"AppleGothic" size:12];
+        label.text = cho;
+        [sv addSubview:label];
 
-    UISwitch *sw = [[UISwitch alloc] init];
-    sw.center = CGPointMake(W-50,22+60*b);
-    sw.on = NO;
-    sw.tag = b+1;
-    [sw addTarget:self action:@selector(hoge:) forControlEvents:UIControlEventValueChanged];
-    [uv addSubview:sw];
+        UISwitch *sw = [[UISwitch alloc] init];
+        sw.center = CGPointMake(W-50,22+60*b);
+        sw.on = NO;
+        sw.tag = b+1;
+        [sw addTarget:self action:@selector(hoge:) forControlEvents:UIControlEventValueChanged];
+        [uv addSubview:sw];
 
-}
-//NSString *abcz = [resultarr componentsJoinedByString:@"\n"];
+    }
+
     [sv addSubview:uv];
     sv.contentSize = uv.bounds.size;
     [self.view addSubview:sv];

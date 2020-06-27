@@ -17,7 +17,7 @@ UIView *uv;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-         self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
+        self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
         self.view.backgroundColor = [UIColor colorWithRed:255.0/255.0 green:153.0/255.0 blue:50.0/255.0 alpha:
 255.0/255.0];
 
@@ -126,13 +126,11 @@ UIView *uv;
 }
 
 - (void)tapped {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://mobile.twitter.com/DevTweak"]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://mobile.twitter.com/DevTweak"]];
 }
 
 -(void) github {
-
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/SsS136"]];
-
 }
 -(void)cydia {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"cydia://url/https://cydia.saurik.com/api/share#?source=https://SsS136.github.io/"]];

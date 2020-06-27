@@ -19,7 +19,7 @@ UITextView *tv;
 -(void)loadView {
     [super loadView];
 
-         self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
+        self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
         self.view.backgroundColor = [UIColor colorWithRed:255.0/255.0 green:153.0/255.0 blue:50.0/255.0 alpha:
 255.0/255.0];
 
