@@ -1,9 +1,0 @@
-Package: com.sss136.tweakdeleter
-Name: Tweak Deleter
-Architecture: iphoneos-arm
-Description: An awesome application!
-Maintainer: sss136
-Author: sss136
-Section: Utilities
-Version: 0.0.1
-Installed-Size: 800
